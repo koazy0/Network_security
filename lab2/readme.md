@@ -54,7 +54,7 @@ attacker	="172.17.0.4"
 
 
 
-![image-20230423135335393](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423135335393.png)
+![image-20230423135335393](pic\image-20230423135335393.png)
 
 
 
@@ -64,7 +64,7 @@ attacker	="172.17.0.4"
 
 对于user ，首先修改解析程序配置文件/etc/resolv.conf，配置主DNS服务器的IP地址172.17.0.3。
 
-![image-20230423140150534](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423140150534.png)
+![image-20230423140150534](pic\image-20230423140150534.png)
 
 
 
@@ -76,7 +76,7 @@ attacker	="172.17.0.4"
 
 在完成配置用户计算机之后，使用 dig 命令从你选择的主机名获取 IP 地址。运行结果如下。
 
-![image-20230423140606753](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423140606753.png)
+![image-20230423140606753](pic\image-20230423140606753.png)
 
 
 
@@ -107,7 +107,7 @@ sudo rndc flush
 
 ​	可以看到端口处于监听状态
 
-![image-20230423154454773](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423154454773.png)
+![image-20230423154454773](pic\image-20230423154454773.png)
 
 
 
@@ -123,28 +123,28 @@ sudo rndc flush
 
 - 查询192.36.148.17，即i-root-server.net，并从这里查询E，G的ipv6地址
 
-  ![image-20230423171906206](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423171906206.png)
+  ![image-20230423171906206](pic\image-20230423171906206.png)
 
 
 
 - 查询192.33.4.12，即c-root-server.net，返回cname解析记录：www.a.shifen.com www.a.shifen.com 以及其IP地址(cname 就是别名)
 
-  ![image-20230423172011035](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423172011035.png)
+  ![image-20230423172011035](pic\image-20230423172011035.png)
 
 - 172.17.0.3 （本地DNS server） 将IP地址发送回 User，User对百度进行ping操作。
 
 
 
-![image-20230423172505828](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423172505828.png)
+![image-20230423172505828](pic\image-20230423172505828.png)
 
 
 
 > 	另外ping 了 4399.com ，得到了不一样的结果，保存了报文文件
->							
+>								
 > 	从其中可以看到a\e\d\m\i . root-server .net 查询域名ip，其中a，e返回结果，d\m\i无相关记录。
 > 	(而且在高版本wireshark中，根域名服务器会直接给你解析出来)
->							
-> 	![image-20230423154847701](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423154847701.png)
+>								
+> 	![image-20230423154847701](pic\image-20230423154847701.png)
 
 ****
 
@@ -154,7 +154,7 @@ sudo rndc flush
 >
 > 198.97.190.53查询是“美国 DoD网络信息中心”。
 >
-> ![image-20230423165929470](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423165929470.png)
+> ![image-20230423165929470](pic\image-20230423165929470.png)
 
 
 
@@ -274,7 +274,7 @@ $TTL 3D
 
 
 
-![image-20230423211142005](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423211142005.png)
+![image-20230423211142005](pic\image-20230423211142005.png)
 
 
 
@@ -322,7 +322,7 @@ ns      IN      A       1.2.3.4
 
 在user里面输入 `dig www.example.com` , 可以见DNS解析成功
 
-![image-20230423214815970](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423214815970.png)
+![image-20230423214815970](pic\image-20230423214815970.png)
 
 
 
@@ -338,7 +338,7 @@ ns      IN      A       1.2.3.4
 
 修改成功
 
-![image-20230423232122372](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423232122372.png)
+![image-20230423232122372](pic\image-20230423232122372.png)
 
 ### 2.2 直接欺骗用户响应
 
@@ -379,7 +379,7 @@ netwox 105 -h www.abcd.com -H 172.17.0.4 -a ns.abcd.com -A 172.17.0.4 -f "src ho
 
 
 
-![image-20230424144943399](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230424144943399.png)
+![image-20230424144943399](pic\image-20230424144943399.png)
 
 
 
@@ -409,19 +409,19 @@ netwox 105 -h www.abcdef.com -H 172.17.0.4 -a ns.abcdef.com -A 172.17.0.4 -f "sr
 
 ​	相对于上个任务来说，已经可以抓到伪造的相应包了。但是依旧不能抓到通过伪造上层DNS服务器来响应本地DNS服务器的报文。详情请见`pcapng\DNS_Poison_Netwox.pcapng`。 说明netwox伪造的是对user的响应，而不是对Local DNS Server 的响应。
 
-![image-20230424155756554](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230424155756554.png)
+![image-20230424155756554](pic\image-20230424155756554.png)
 
 
 
 
 
-![image-20230424161340514](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230424161340514.png)
+![image-20230424161340514](pic\image-20230424161340514.png)
 
 
 
 **最终实验结果如下：**
 
-![image-20230426113839486](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230426113839486.png)
+![image-20230426113839486](pic\image-20230426113839486.png)
 
 
 
@@ -513,13 +513,13 @@ pkt = sniff(filter='udp and dst port 53 and src host 172.17.0.3', prn=spoof_dns)
 
 捕获的报文见`pcapng\DNS_Poison.pcapng`
 
-![image-20230426112959485](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230426112959485.png)
+![image-20230426112959485](pic\image-20230426112959485.png)
 
 
 
 停止攻击后，再次进行查询，发现查询结果一致，说明DNS缓存中毒实验成功。
 
-![image-20230426114309057](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230426114309057.png)
+![image-20230426114309057](pic\image-20230426114309057.png)
 
 
 
@@ -535,7 +535,7 @@ pkt = sniff(filter='udp and dst port 53 and src host 172.17.0.3', prn=spoof_dns)
 
 通过`vim /etc/bind/named.conf.default-zones`增加以下条目
 
-![image-20230427224135722](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230427224135722.png)
+![image-20230427224135722](pic\image-20230427224135722.png)
 
 创建文件`/etc/bind/db.attacker`
 
@@ -666,7 +666,7 @@ with open('Payload.bin', 'wb') as f:
 
 16进制打开`Payload.bin`，目标画上标记的就是我们所需要进行响应的报文
 
-![image-20230426172036851](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230426172036851.png)
+![image-20230426172036851](pic\image-20230426172036851.png)
 
 用`DNS_Poison.c`进行发包，代码过长这里不详细列出。这里只讲解关键字段
 
@@ -759,13 +759,13 @@ tc qdisc add dev eth0 root netem delay 100ms
 
 **实验结果截图**：（捕获报文见`Kaminsky.pcapng`, 捕获的报文有点大，所以未上传至github）
 
-![image-20230428165605928](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230428165605928.png)
+![image-20230428165605928](pic\image-20230428165605928.png)
 
 
 
 另外可以在`attachment\dump.txt`查看下面输入
 
-![image-20230428170543525](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230428170543525.png)
+![image-20230428170543525](pic\image-20230428170543525.png)
 
 > 个人补充：
 >
@@ -781,7 +781,7 @@ tc qdisc add dev eth0 root netem delay 100ms
 
 1.服务启动失败，提示权限不够
 
-![image-20230423153529628](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230423153529628.png)
+![image-20230423153529628](pic\image-20230423153529628.png)
 
 
 
@@ -810,7 +810,7 @@ tc qdisc add dev eth0 root netem delay 100ms
 
 3.很有意思的一个问题，就是用scapy进行本地DNS中毒的时候伪造包比真实包慢2s
 
-![image-20230426112300131](C:\Users\koazy-0\Desktop\计算机网络安全\实验\lab2\pic\image-20230426112300131.png)
+![image-20230426112300131](pic\image-20230426112300131.png)
 
 后面检查出来是记录数不匹配，即要检查修改qdcount，ancount，nscount，arcount（后面把nscount=2改为1 就好了
 
